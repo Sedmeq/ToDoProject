@@ -1,29 +1,29 @@
 # UsersApp - Todo Application
 
-Modern və responsive todo idarəetmə sistemi ASP.NET Core və Entity Framework istifadə edərək hazırlanmışdır.
+A modern and responsive todo management system built using ASP.NET Core and Entity Framework.
 
-## 🚀 Xüsusiyyətlər
+## 🚀 Features
 
-### 🔐 Autentifikasiya
-- **Qeydiyyat**: Yeni istifadəçi hesabı yaratma
-- **Giriş**: Mövcud hesabla daxil olma
-- **Parol bərpası**: Email vasitəsilə parol dəyişdirmə
-- **Çıxış**: Təhlükəsiz hesabdan çıxış
+### 🔐 Authentication
+- **Registration**: Create a new user account
+- **Login**: Sign in with existing account
+- **Password Reset**: Change password via email
+- **Logout**: Secure logout functionality
 
-### ✅ Todo İdarəetməsi
-- **Task əlavə etmə**: Yeni tapşırıqlar yaratma
-- **Status dəyişdirmə**: Tapşırıqları tamamlanmış/tamamlanmamış kimi işarələmə
-- **Silmə**: Lazımsız tapşırıqları silmə
-- **Filtrlləmə**: Bütün, aktiv və ya tamamlanmış tapşırıqları görüntüləmə
-- **Real-time yeniləmə**: AJAX istifadə edərək səhifə yenilənməsi olmadan əməliyyatlar
+### ✅ Todo Management
+- **Add Task**: Create new tasks
+- **Change Status**: Mark tasks as completed or active
+- **Delete**: Remove unnecessary tasks
+- **Filter**: View all, active, or completed tasks
+- **Real-time Updates**: Perform actions without page reload using AJAX
 
 ### 🎨 UI/UX
-- **Dark/Light tema**: Tema dəyişdirmə imkanı
-- **Responsive design**: Mobil və desktop cihazlarda optimal görünüm
-- **Modern animasiyalar**: Smooth keçidlər və hover effektləri
-- **İntuitive interfeys**: İstifadəçi dostu dizayn
+- **Dark/Light Theme**: Switch between themes
+- **Responsive Design**: Optimized for both mobile and desktop devices
+- **Modern Animations**: Smooth transitions and hover effects
+- **Intuitive Interface**: User-friendly layout
 
-## 🛠️ Texnologiyalar
+## 🛠️ Technologies
 
 - **Backend**: ASP.NET Core 8.0
 - **Database**: SQL Server (Entity Framework Core)
@@ -32,137 +32,81 @@ Modern və responsive todo idarəetmə sistemi ASP.NET Core və Entity Framework
 - **Styling**: Bootstrap 5 + Custom CSS
 - **AJAX**: Fetch API
 
-## 📋 Tələblər
+## 📋 Requirements
 
 - .NET 8.0 SDK
-- SQL Server (LocalDB və ya SQL Server Express)
-- Visual Studio 2022 və ya VS Code
+- SQL Server (LocalDB or SQL Server Express)
+- Visual Studio 2022 or VS Code
 
-## ⚙️ Quraşdırma
-
-### 1. Repository-ni klonlayın
-```bash
-git clone <repository-url>
-cd UsersApp
-```
-
-### 2. Dependency-ləri yükləyin
-```bash
-dotnet restore
-```
-
-### 3. Database connection string-ini yeniləyin
-`appsettings.json` faylında öz SQL Server məlumatlarınızı daxil edin:
-```json
-{
-  "ConnectionStrings": {
-    "Default": "Server=YOUR_SERVER;Database=ToDoProjectDB;Trusted_Connection=True;TrustServerCertificate=True"
-  }
-}
-```
-
-### 4. Database migration-larını tətbiq edin
-```bash
-dotnet ef database update
-```
-
-### 5. Aplikasiyanı işə salın
-```bash
-dotnet run
-```
-
-Aplikasiya `https://localhost:7014` ünvanında işə düşəcək.
-
-## 📁 Proyekt Strukturu
+## 📁 Project Structure
 
 ```
 UsersApp/
 ├── Controllers/
-│   ├── AccountController.cs      # Autentifikasiya əməliyyatları
-│   ├── HomeController.cs         # Ana səhifə
-│   └── TodoController.cs         # Todo əməliyyatları
+│   ├── AccountController.cs      # Authentication operations
+│   ├── HomeController.cs         # Home Page
+│   └── TodoController.cs         # Todo operations
 ├── Data/
 │   └── AppDbContext.cs           # Database context
 ├── Models/
-│   ├── Users.cs                  # İstifadəçi modeli
-│   ├── ToDo.cs                   # Todo modeli
-│   └── ErrorViewModel.cs         # Xəta modeli
+│   ├── Users.cs                  # User model
+│   ├── ToDo.cs                   # Todo model
+│   └── ErrorViewModel.cs         # Error model
 ├── ViewModels/
-│   ├── LoginViewModel.cs         # Giriş formu
-│   ├── RegisterViewModel.cs      # Qeydiyyat formu
-│   ├── ChangePasswordViewModel.cs # Parol dəyişdirmə
-│   └── VerifyEmailViewModel.cs   # Email təsdiqi
+│   ├── LoginViewModel.cs         # Login form
+│   ├── RegisterViewModel.cs      # Registration form
+│   ├── ChangePasswordViewModel.cs # Password change
+│   └── VerifyEmailViewModel.cs   # Email verification
 ├── Views/
-│   ├── Account/                  # Autentifikasiya səhifələri
-│   ├── Home/                     # Ana səhifələr
-│   ├── Todo/                     # Todo səhifələri  
-│   └── Shared/                   # Paylaşılan layout-lar
-└── Program.cs                    # Aplikasiya konfiqurasiyası
+│   ├── Account/                  # Authentication views
+│   ├── Home/                     # Home views
+│   ├── Todo/                     # Todo views  
+│   └── Shared/                   # Shared layouts
+└── Program.cs                    # Application configuration
 ```
 
-## 🔧 Əsas Komponentlər
+## 🎯 Usage
 
-### Identity Konfigurasiyası
-```csharp
-builder.Services.AddIdentity<Users, IdentityRole>(options =>
-{
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 8;
-    options.User.RequireUniqueEmail = true;
-})
-```
+### Register & Login
+1. Launch the application
+2. Click on the "Register" link
+3. Enter your name, email, and password
+4. After registration, you'll be redirected to the login page
+5. Log in with your credentials
 
-### Database Əlaqəsi
-Entity Framework Core istifadə edərək SQL Server ilə əlaqə qurulur:
-```csharp
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-```
+### Manage Todos
+1. After logging in, navigate to the "ToDo" menu
+2. Type your task in the input field and click "ADD"
+3. Mark a task as complete by clicking the checkbox
+4. Delete a task by clicking the "×" button
+5. Use the "ALL", "ACTIVE", or "COMPLETED" tabs to filter tasks
 
-## 🎯 İstifadə
+### Theme Switching
+Click the theme toggle button in the top-right corner to switch between Dark and Light themes.
 
-### Qeydiyyat və Giriş
-1. Aplikasiyanı açın
-2. "Register" linkini klikləyin
-3. Ad, email və parol daxil edin
-4. Qeydiyyatdan sonra "Login" səhifəsinə yönləndiriləcəksiniz
-5. Email və parolunuzla daxil olun
+## 🔒 Security
 
-### Todo İdarəetməsi
-1. Giriş etdikdən sonra "ToDo" menyusuna keçin
-2. Yeni tapşırıq əlavə etmək üçün input sahəsinə yazın və "ADD" düyməsini basın
-3. Tapşırığı tamamlamaq üçün checkbox-u klikləyin
-4. Silmek üçün "×" düyməsini basın
-5. Filtrlləmek üçün "ALL", "ACTIVE" və ya "COMPLETED" tablarını istifadə edin
+- **CSRF Protection**: Anti-forgery tokens used in all POST operations
+- **Authorization**: Todo operations are accessible only to logged-in users
+- **Data Validation**: Model validation and server-side checks
+- **XSS Protection**: HTML encoding and clean JavaScript
 
-### Tema Dəyişdirmə
-Sağ yuxarı küncdəki tema düyməsini klikləyərək Dark və Light tema arasında keçid edə bilərsiniz.
+## 🤝 Contributing
 
-## 🔒 Təhlükəsizlik
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- **CSRF Qorunması**: Bütün POST əməliyyatlarında anti-forgery token-lar istifadə olunur
-- **Authorization**: Todo əməliyyatları yalnız daxil olmuş istifadəçilər üçün əlçatandır
-- **Data Validation**: Model validation və server-side yoxlamalar
-- **XSS Qorunması**: HTML encoding və təmiz JavaScript
+## 📝 License
 
-## 🤝 Töhfə vermək
+This project is licensed under the MIT License.
 
-1. Repository-ni fork edin
-2. Feature branch yaradın (`git checkout -b feature/AmazingFeature`)
-3. Dəyişikliklərini commit edin (`git commit -m 'Add some AmazingFeature'`)
-4. Branch-ı push edin (`git push origin feature/AmazingFeature`)
-5. Pull Request açın
+## 📞 Contact
 
-## 📝 Lisenziya
-
-Bu proyekt MIT lisenziyası altında paylaşılmışdır.
-
-## 📞 Əlaqə
-
-Suallarınız və ya təklifləriniz üçün mənimlə əlaqə saxlaya bilərsiniz.
+Feel free to reach out if you have any questions or suggestions.
 
 ---
 
-⭐ **Bu proyekti bəyəndinizsə, ulduz verməyi unutmayın!**
+⭐ **If you liked this project, don't forget to give it a star!**
